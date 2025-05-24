@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Deskripsi AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-green-100 min-h-screen p-10">
+  <div class="max-w-lg mx-auto">
+    <h1 class="text-2xl font-bold mb-6">Form Deskripsi Produk AI</h1>
+
+    <form id="form-deskripsi" class="space-y-1">
+      <label class="block font-medium">Nama Produk</label>
+      <input required 
+       id="namaProduk" 
+       type="text" 
+       class="w-full border border-gray-300 rounded p-2" 
+       placeholder="Masukkan nama produk" />
+      <div class="h-2"></div> 
+
+      <label class="block font-medium">Kategori Produk</label>
+      <input required 
+       id="kategori" 
+       type="text" 
+       class="w-full border border-gray-300 rounded p-2" 
+       placeholder="Contoh: Makanan Ringan, Pakaian, Elektronik, dll." />
+      <div class="h-2"></div> 
+
+      <label class="block font-medium">Target Pasar</label>
+      <input required 
+       id="targetPasar" 
+       type="text" 
+       class="w-full border border-gray-300 rounded p-2" 
+       placeholder="Contoh: Anak-anak, Remaja, dll." />
+      <div class="h-2"></div> 
+
+      <label class="block font-medium">Manfaat atau Kelebihan</label>
+      <input required 
+       id="manfaat" 
+       type="text" 
+       class="w-full border border-gray-300 rounded p-2" 
+       placeholder="Contoh: Renyah, tanpa pengawet" />
+      <div class="h-2"></div> 
+
+      <label class="block font-medium">Gaya Penulisan</label>
+      <select id="gaya" class="w-full border border-gray-300 rounded p-2">
+        <option value="santai">Santai</option>
+        <option value="profesional">Profesional</option>
+        <option value="informatif">Informatif</option>
+        <option value="promosi">Promosi</option>
+        <option value="lucu">Lucu</option>
+      </select>
+      <div class="h-4"></div> 
+
+      <button type="submit" class="w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+        Generate Deskripsi
+      </button>
+    </form><br>
+
+    <button onclick="window.location.href='index.html'">← Kembali ke Home</button>
+
+    <div id="loading" class="mt-4 text-yellow-600 hidden">Sedang memproses... Mohon tunggu sebentar..</div>
+    <div id="hasil" class="mt-4 p-4 bg-gray-100 rounded hidden">
+      <h2 class="font-semibold mb-2">Hasil AI:</h2>
+      <p id="hasilText" class="whitespace-pre-line"></p>
+       <button id="copyButton" class="mt-4 flex items-center gap-2 bg-gray-200 text-gray-800 px-3 py-2 rounded hover:bg-gray-300">
+       <span id="copyIcon">📋</span>
+       <span id="copyLabel">Copy</span>
+       </button>
+
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("form-deskripsi").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const namaProduk = document.getElementById("namaProduk").value;
+      const kategori = document.getElementById("kategori").value;
+      const targetPasar = document.getElementById("targetPasar").value;
+      const manfaat = document.getElementById("manfaat").value;
+      const gaya = document.getElementById("gaya").value;
+
+      document.getElementById("loading").classList.remove("hidden");
+      document.getElementById("hasil").classList.add("hidden");
+
+      try {
+        const response = await fetch("http://localhost:3000/api/proxy-deskripsi", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ namaProduk, kategori, targetPasar, manfaat, gaya })
+        });
+
+        const data = await response.json();
+        document.getElementById("hasilText").textContent = data.result || "Tidak ada jawaban";
+      } catch (err) {
+        document.getElementById("hasilText").textContent = "Terjadi kesalahan.";
+      }
+
+      document.getElementById("loading").classList.add("hidden");
+      document.getElementById("hasil").classList.remove("hidden");
+
+      document.getElementById("copyButton").addEventListener("click", function () {
+      const hasil = document.getElementById("hasilText").textContent;
+      const icon = document.getElementById("copyIcon");
+      const label = document.getElementById("copyLabel");
+
+      navigator.clipboard.writeText(hasil).then(() => {
+      icon.textContent = "✅";
+      label.textContent = "Copied";
+      this.classList.remove("bg-gray-200", "text-gray-800");
+      this.classList.add("bg-green-500", "text-white");
+
+      setTimeout(() => {
+      icon.textContent = "📋";
+      label.textContent = "Copy";
+      this.classList.remove("bg-green-500", "text-white");
+      this.classList.add("bg-gray-200", "text-gray-800");
+      }, 2000);
+      }).catch(() => {
+      label.textContent = "Gagal";
+     });
+    });
+
+  });
+  </script>
+</body>
+</html>

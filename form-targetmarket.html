@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Form Target Market AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-green-100 min-h-screen p-10">
+  <div class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-center">Form Target Market JualinAI</h1>
+
+    <!-- Toggle Versi -->
+    <div class="mb-6 flex justify-center gap-4">
+      <button id="versiAButton" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Sudah Tahu Target Market</button>
+      <button id="versiBButton" class="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-green-700">Belum Tahu Target Market</button>
+    </div>
+
+    <!-- Versi A -->
+    <form id="formA" class="space-y-1">
+      <h2 class="text-xl font-semibold">Membuat Deskripsi Rinci Target Market</h2>
+      <div class="h-2"></div>
+
+      <label class="block font-medium">Produk</label>
+      <input required 
+       id="produkA" 
+       type="text" 
+       class="w-full border rounded p-2" 
+       placeholder="Masukkan deskripsi singkat produk" />
+      <div class="h-2"></div>
+
+      <label class="block font-medium">Target market secara umum</label>
+      <input required 
+       type="text" 
+       id="target" 
+       class="w-full border rounded p-2" 
+       placeholder="Contoh: Pelajar SMA, Ibu Rumah Tangga, dll" />
+      <div class="h-2"></div>
+
+      <label class="block font-medium">Karakteristik target market</label>
+      <textarea required
+       id="traits" 
+       class="w-full border rounded p-2" 
+       rows="3" 
+       placeholder="Contoh: Suka makanan gurih, aktif di Instagram, suka diskon"></textarea>
+      <div class="h-2"></div>
+
+      <label class="block font-medium">Masalah yang ingin mereka selesaikan</label>
+      <textarea required
+       id="needs" 
+       class="w-full border rounded p-2" 
+       rows="3" 
+       placeholder="Contoh: Butuh camilan sehat, solusi cepat saat lapar, dll"></textarea>
+      <div class="h-4"></div>
+
+      <button type="submit" class="w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Generate Ulasan Target Market</button><br><br>
+
+      <button onclick="window.location.href='index.html'">← Kembali ke Home</button>
+    </form>
+
+    <!-- Versi B -->
+    <form id="formB" class="space-y-1 hidden">
+      <h2 class="text-xl font-semibold">Mencari Target Market yang Sesuai dengan Produk</h2>
+      <div class="h-2"></div>
+
+      <label class="block font-medium">Produk</label>
+      <input required 
+       id="produkB" 
+       type="text" 
+       class="w-full border rounded p-2" 
+       placeholder="Masukkan deskripsi singkat produk" />
+      <div class="h-2"></div>
+
+      <label class="block font-medium">Harga Jual</label>
+      <input required 
+       id="kategoriB" 
+       type="text" 
+       class="w-full border rounded p-2" 
+       placeholder="Contoh: Makanan Ringan, Fashion, dll." />
+      <div class="h-2"></div>
+
+      <label class="block font-medium">Manfaat atau Kelebihan Produk</label>
+      <input required 
+       id="manfaatB" 
+       type="text" 
+       class="w-full border rounded p-2" 
+       placeholder="Contoh: Praktis, bergizi, ringan dibawa..." />
+      <div class="h-2"></div>
+
+      <label class="block font-medium">Distribusi yang direncanakan</label>
+      <input required
+       type="text" 
+       id="distribution" 
+       class="w-full border rounded p-2" 
+       placeholder="Contoh: Online via Tokopedia & Shopee, toko fisik">
+      <div class="h-4"></div>
+
+      <button type="submit" class="w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Bantu Saya Temukan Target Market</button><br><br>
+
+      <button onclick="window.location.href='index.html'">← Kembali ke Home</button>
+    </form>
+
+    <!-- Loading dan Hasil -->
+    <div id="loading" class="mt-6 text-yellow-600 hidden">Sedang memproses... Mohon tunggu sebentar...</div>
+    <div id="hasil" class="mt-6 p-4 bg-gray-100 rounded hidden">
+      <h3 class="font-semibold mb-2">Hasil AI:</h3>
+      <p id="hasilText" class="whitespace-pre-line"></p>
+      <button id="copyButton" class="mt-4 flex items-center gap-2 bg-gray-200 text-gray-800 px-3 py-2 rounded hover:bg-gray-300">
+        <span id="copyIcon">📋</span>
+        <span id="copyLabel">Copy</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const versiAButton = document.getElementById("versiAButton");
+    const versiBButton = document.getElementById("versiBButton");
+    const formA = document.getElementById("formA");
+    const formB = document.getElementById("formB");
+
+    versiAButton.addEventListener("click", () => {
+      formA.classList.remove("hidden");
+      formB.classList.add("hidden");
+      versiAButton.classList.replace("bg-gray-200", "bg-green-600");
+      versiAButton.classList.replace("text-gray-800", "text-white");
+      versiBButton.classList.replace("bg-green-600", "bg-gray-200");
+      versiBButton.classList.replace("text-white", "text-gray-800");
+    });
+
+    versiBButton.addEventListener("click", () => {
+      formB.classList.remove("hidden");
+      formA.classList.add("hidden");
+      versiBButton.classList.replace("bg-gray-200", "bg-green-600");
+      versiBButton.classList.replace("text-gray-800", "text-white");
+      versiAButton.classList.replace("bg-green-600", "bg-gray-200");
+      versiAButton.classList.replace("text-white", "text-gray-800");
+    });
+
+    async function handleSubmit(url, payload) {
+      document.getElementById("loading").classList.remove("hidden");
+      document.getElementById("hasil").classList.add("hidden");
+
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        document.getElementById("hasilText").textContent = data.result || "Tidak ada jawaban";
+      } catch {
+        document.getElementById("hasilText").textContent = "Terjadi kesalahan.";
+      }
+
+      document.getElementById("loading").classList.add("hidden");
+      document.getElementById("hasil").classList.remove("hidden");
+    }
+
+    formA.addEventListener("submit", function(e) {
+      e.preventDefault();
+      handleSubmit("http://localhost:3000/api/proxy-targetmarket-sudah", {
+        produk: document.getElementById("produkA").value,
+        targetMarket: document.getElementById("target").value,
+        karakteristik: document.getElementById("traits").value,
+        masalah: document.getElementById("needs").value
+      });
+    });
+
+    formB.addEventListener("submit", function(e) {
+      e.preventDefault();
+      handleSubmit("http://localhost:3000/api/proxy-targetmarket-belum", {
+        produk: document.getElementById("produkB").value,
+        kategori: document.getElementById("kategoriB").value,
+        manfaat: document.getElementById("manfaatB").value,
+        distribusi: document.getElementById("distribution").value
+      });
+    });
+
+    document.getElementById("copyButton").addEventListener("click", function () {
+      const hasil = document.getElementById("hasilText").textContent;
+      const icon = document.getElementById("copyIcon");
+      const label = document.getElementById("copyLabel");
+
+      navigator.clipboard.writeText(hasil).then(() => {
+        icon.textContent = "✅";
+        label.textContent = "Copied";
+        this.classList.replace("bg-gray-200", "bg-green-500");
+        this.classList.replace("text-gray-800", "text-white");
+
+        setTimeout(() => {
+          icon.textContent = "📋";
+          label.textContent = "Copy";
+          this.classList.replace("bg-green-500", "bg-gray-200");
+          this.classList.replace("text-white", "text-gray-800");
+        }, 2000);
+      }).catch(() => {
+        label.textContent = "Gagal";
+      });
+    });
+  </script>
+</body>
+</html>
