@@ -127,7 +127,7 @@
       document.getElementById("hasil").classList.add("hidden");
 
       try {
-        const response = await fetch("http://localhost:3000/api/proxy-konten", {
+        const response = await fetch("/api/proxy-konten", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({  namaBrand, produk, tujuan, platform, audiens, gaya, keterbatasan })
