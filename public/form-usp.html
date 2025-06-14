@@ -94,7 +94,7 @@
       document.getElementById("hasil").classList.add("hidden");
 
       try {
-        const response = await fetch("/pages/api/proxy-usp", {
+        const response = await fetch("/api/proxy-usp", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ nama, produk, keunggulan, keunikan, target, nilai })
