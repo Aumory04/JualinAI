@@ -158,7 +158,7 @@
 
     formA.addEventListener("submit", function(e) {
       e.preventDefault();
-      handleSubmit("http://localhost:3000/api/proxy-targetmarket-sudah", {
+      handleSubmit("/api/proxy-targetmarket-sudah", {
         produk: document.getElementById("produkA").value,
         targetMarket: document.getElementById("target").value,
         karakteristik: document.getElementById("traits").value,
@@ -168,7 +168,7 @@
 
     formB.addEventListener("submit", function(e) {
       e.preventDefault();
-      handleSubmit("http://localhost:3000/api/proxy-targetmarket-belum", {
+      handleSubmit("/api/proxy-targetmarket-belum", {
         produk: document.getElementById("produkB").value,
         kategori: document.getElementById("kategoriB").value,
         manfaat: document.getElementById("manfaatB").value,
