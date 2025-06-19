@@ -6,8 +6,8 @@
   <title>Form Pembuat Ide Konten</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-green-100 min-h-screen p-10">
-  <div class="max-w-lg mx-auto">
+<body class="bg-green-100 min-h-screen px-6 py-12">
+  <div class="w-full max-w-3xl mx-auto">
     <h1 class="text-2xl font-bold mb-6">Form Ide Konten Sosial Media</h1>
 
     <form id="form-konten" class="space-y-1">
@@ -24,7 +24,15 @@
        id="produk" 
        type="text" 
        class="w-full border border-gray-300 rounded p-2" 
-       placeholder="Contoh: Keripik kentang manis" />
+       placeholder="Contoh: Keripik kentang, baju anak" />
+      <div class="h-2"></div>
+
+      <label class="block font-medium">Target Audiens</label>
+      <input 
+       id="audiens" required 
+       type="text" 
+       class="w-full border border-gray-300 rounded p-2" 
+       placeholder="Contoh: Ibu rumah tangga, remaja" />
       <div class="h-2"></div>
 
       <label class="block font-medium">Tujuan Konten</label>
@@ -59,14 +67,6 @@
       </select>
       <div class="h-2"></div>
 
-      <label class="block font-medium">Target Audiens</label>
-      <input 
-       id="audiens" required 
-       type="text" 
-       class="w-full border border-gray-300 rounded p-2" 
-       placeholder="Contoh: Ibu rumah tangga" />
-      <div class="h-2"></div>
-
       <label class="block font-medium">Gaya Konten</label>
       <select id="gaya" class="w-full border border-gray-300 rounded p-2">
         <option value="santai">Santai</option>
@@ -86,7 +86,7 @@
        id="opsional" 
        type="text" 
        class="w-full border border-gray-300 rounded p-2" 
-       placeholder="Contoh: Hanya ada kamera HP, tempat kecil" />
+       placeholder="Contoh: kamera HP, tempat kecil" />
       <div class="h-4"></div>
 
       <button type="submit" class="w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Generate Ide Konten</button>
